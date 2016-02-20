@@ -2,6 +2,9 @@
 
 #R syntax & Useful functions
 
+#!CAUTION! - AFAIK most if not all of the functions return some new object rather
+#       than mutating the objects in place
+
 #############
 # Workspace #
 #############
@@ -47,7 +50,6 @@ while (k <= 1000) {
 }
 
 #if-else, break
-
 if (k != 2) {
 
     print(k)
@@ -65,7 +67,11 @@ if (k != 2) {
 #modulo
 4 %% 2
 
-#TRUE/FALSE
+#paste(str1,str2,sep=sep) - concatenating strings with seperator sep
+paste('Kaggle', 'Competition', sep='_')
+
+#TRUE/FALSE - just syntax for booleans
+TRUE == FALSE
 
 #switch(input, case, anothercase, someothercase, default) - just the generic switch
 #       usually faster than if-else
@@ -94,7 +100,7 @@ attach(train)
 
 #names(data) - lists names of features in data frame (names works for not just
 #       data frames, but also fitted models etc)
-name(train)
+names(train)
 
 #dframe[i,j] - ijth entry in dframe
 #note that in R, indices start from 1
@@ -121,6 +127,10 @@ somevector = c(123,456)
 #rep(k,n) - generates a vector of length n with k in each entry
 somevector = rep(0,100)
 
+#normal arithmetic operations are performed element wise for vectors
+c(1,2,3) / c(3,2,1)
+c(1,2,3)^2
+
 ############
 # Matrices #
 ############
@@ -139,6 +149,20 @@ t(somematrix1)
 #somematrix1 %*% t(somematrix2) - matrix multiplication
 somematrix1 %*% t(somematrix2)
 
+#normal arithmetic operations are performed element wise for matrices
+matrix(c(1,2,3,4,5,6),nrow=2) * matrix(c(1,2,3,4,5,6),nrow=2)
+matrix(c(2,4,2,4,2,4),nrow=2,byrow=TRUE)^2
+
+##########################
+# Combining Columns/Rows #
+##########################
+
+#rbind(item1,item2) - bind item1 and item2 by rows
+rbind(c(1,2,3),c(3,2,1))
+
+#cbind(item1,item2) - bind item1 and item2 by columns
+cbind(c(1,2,3),c(3,2,1))
+
 #########
 # Types #
 #########
@@ -154,6 +178,27 @@ is.nan(NaN)
 #is.logical - this checks booleans
 
 #is.factor
+
+#is.vector
+
+#is.matrix
+
+#is.data.frame
+
+#as.matrix - coerce to matrix
+#       rest behave similarly
+
+#as.data.frame
+
+#as.integer
+
+#as.logical
+
+#as.numeric
+
+#as.vector
+
+#as.factor
 
 ######################
 # Defining functions #
@@ -185,6 +230,13 @@ plot(linear.fit)
 
 #predict(model, testdata) - predicts response from testdata
 predict(linear.fit, data = train[,-medv])
+
+#############################
+# Generalized Linear Models #
+#############################
+
+#glm(response~features,data=train,family=family) - fit a glm
+#       family takes 'Binomial', 'Poisson', 'Gaussian', etc
 
 ###################
 # Random Sampling #
@@ -232,3 +284,74 @@ l = rbinom(1000,1,0.5)
 x = rexp(1000,0.5)
 y = rnorm(1000)
 plot(y, x, col=l+1, pch=16, asp=0.5,xlab = 'Normal', ylab='Exponential', main='Title Here')
+
+#dev.off() - resets all plots
+dev.off()
+
+#par(mfrow=c(2,2)) - set the graphical output grid to be nxm
+par(mfrow=c(2,2))
+
+for (i in 1:4) {
+
+    l = rbinom(1000,1,0.5)
+    x = rexp(1000,0.5)
+    y = rnorm(1000)
+    plot(y, x, col=l+1, pch=16, asp=0.5,xlab = 'Normal', ylab='Exponential', main=paste('Plot#', i, sep = ' '))
+
+}
+
+#####################
+# Statistical Stuff #
+#####################
+
+#cor(data) - correlation matrix
+cor(train)
+
+#cov(data) - covariance matrix
+cov(train)
+
+#scale(data) - standardizes data
+scale(train)
+
+#summary(data) - basic summary, including mean, median, sd, etc of features
+summary(train)
+
+#pnorm(1) - get the cumulative probability under the standard normal cdf at q = 1,
+#       i.e. this is just P(X <= 1)
+#       the other ones work similarly
+pnorm(1)
+
+#pbinom
+
+#pexp
+
+#punif
+
+#pt - t distribution
+
+#pchisq - chi-squared distribution
+
+#pf - F distribution
+
+#for all these pfunctions, replace p by q and you get the corresponding qfunctions for
+#       computing the quantiles
+
+#scatterplot matrix
+plot(train)
+
+#qqplot(data1,data2) - qqplot data1 vs data2
+qqplot(runif(50),rexp(50))
+
+#qqnorm(data) - qqplot data against normal
+qqnorm(runif(30))
+
+#hist(rnorm(50)) - histogram
+hist(rnorm(50), xlab = 'Value', ylab = 'Frequency', main='Histogram of Normal Data')
+
+#boxplot(rbinom(1,20,0.7)) - boxplot
+#       you can have several boxplots together
+boxplot(rbinom(1,20,0.6),runif(50),rnorm(1000))
+
+#sample(data, size = n, replace) - uniformly sample n samples from from data, with
+#       replacement if replace = TRUE
+plot(sample(rnorm(100), size = 20 ,replace = TRUE),xlab = 'Index', ylab = 'Normal Sample Value', main = 'Sampling 20 from Normal(0,1)')
