@@ -178,3 +178,8 @@ highestcors
 
 #Looking at the pairwise scatterplots, the data isn't well-separated anywhere.
 #Hence, logistic regression is a possible candidate.
+
+#Need to check conditional distributions of factors. Earlier on I found (by accident)
+#that the prior probabilities of the classes remain about the same if we just dropped
+#all the samples with missing values entirely, not including the features with factor
+#levels.
