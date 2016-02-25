@@ -183,3 +183,9 @@ highestcors
 #that the prior probabilities of the classes remain about the same if we just dropped
 #all the samples with missing values entirely, not including the features with factor
 #levels.
+
+#try 2 approaches (one using empty values as another level)
+#approach 1 - use missing factor levels as a level in itself
+#approach 2 - fill in missing factor levels using kNN or SVM
+
+#dimensional reduction
