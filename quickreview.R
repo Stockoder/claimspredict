@@ -131,6 +131,11 @@ somevector = rep(0,100)
 c(1,2,3) / c(3,2,1)
 c(1,2,3)^2
 
+#sapply(somevector, somefunction) - applies somefunction elementwise to somevector
+#       and returns a vector
+sapply(c(1,2,3),max)
+sapply(c(1,2,3),{function(z) z^2})
+
 ############
 # Matrices #
 ############
@@ -236,7 +241,7 @@ predict(linear.fit, data = train[,-medv])
 #############################
 
 #glm(response~features,data=train,family=family) - fit a glm
-#       family takes 'Binomial', 'Poisson', 'Gaussian', etc
+#       family takes binomialb, 'Poisson', 'Gaussian', etc
 
 ###################
 # Random Sampling #

@@ -118,6 +118,7 @@ for (i in 1:133) {
 
     } else {
 
+        #Cases due to continuous features
         miss.indices = unique(c(miss.indices,which(is.na(train[,i]))))
 
     }
