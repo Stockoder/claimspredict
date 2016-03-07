@@ -22,10 +22,14 @@ summary(test)
 ##in the training set will be applicable to the test set, i.e. overfitting is less of
 ##an issue! Let's make this comparison exact.
 
-#Code for exact comparison.
+#Code
+#for
+#exact
+#comparison
+#goes
+#here.
 
 #Define the following data sets
-#See <Checking the Test Set> section for justification.
 
 #Complete Cases for training set
 trainA = train[complete.cases(train),]
@@ -52,8 +56,40 @@ total = dim(test)[1]
 cat('Incomplete Cases:',count,'\nProportion of Total Cases:', count/total)
 
 ###########################
+# Plan for Model and Plan #
+###########################
+
+#This is succinctly expressed by an analogy:
+#'trainA + trainB' is to 'testA + testB' as 'train' is to 'test'
+
+#Basically, the idea is:
+#
+#   1. Fit a model to trainA and use it to predict testA.
+#
+#   2. Fit a model to trainB and use it to predict testB.
+
+#Thus, we need to check the pairwise correspondence. If this correspondence breaks
+#down anywhere, then the approach is liable to as well.
+
+#There remains the problem of missing values. Since the missing values are part of
+#the test set, we are forced to deal with them. We can choose either Stochastic Multiple
+#Imputation or Maximum Likelihood. This also works its way into the model:
+#
+#   1. Fit a model on trainA and use it to fit the missing values in trainB. Note
+#      that this is just for filling in missing values and not for classification.
+#
+#   2. Fit a model on testA and use it to fit the missing values in testB. Again, this
+#      is just for filling in missing values and not for classification.
+#
+#   3. This works its way into the model because the predictions from the model fitted
+#      to testB will be used by the model fitted to trainB to predict the response for
+#      testB.
+
+###########################
 # Complete Cases Analysis #
 ###########################
+
+#Analyze the complete cases of both the training and test sets.
 
 #Note: I do realize this is bad practice since the test set's supposed to be hidden
 #      away. However, in this case, since we have lots of missing data and a very close
@@ -105,11 +141,17 @@ for (i in 3:133) {
 # Incomplete Cases Analysis #
 #############################
 
+#Analyze the incomplete cases of both the training and test sets.
 
 ######################
 # All Cases Analysis #
 ######################
 
+#Analyze the full training and test data sets side by side.
+
+#####################################
+# Feature Selection and Engineering #
+#####################################
 
 ##########################################
 # Principal Components on Numerical Data #
@@ -138,6 +180,8 @@ summary(PCA)
 # PCP #
 #######
 
+
+
 ###############
 # Scagnostics #
 ###############
@@ -147,3 +191,9 @@ require(scagnostics)
 ###########
 # Heatmap #
 ###########
+
+####################
+# Plausible Models #
+####################
+
+linear.fit = lm(target~.-ID,data=train)

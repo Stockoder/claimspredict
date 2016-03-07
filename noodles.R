@@ -11,6 +11,7 @@ attach(train)
 ###############################
 # Setting Graphics Parameters #
 ###############################
+
 #Adjusting transparency
 brown.transparent = adjustcolor("brown",alpha.f = 0.4)
 cadet.transparent = adjustcolor("cadetblue4", alpha.f = 0.4)

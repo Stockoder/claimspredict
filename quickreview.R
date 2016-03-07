@@ -1,4 +1,4 @@
-#Kaggle - BNP Claims Modelling
+#Kaggle - BNP Claims
 
 #R syntax & Useful functions
 
@@ -28,6 +28,16 @@ rm(list=ls())
 #getting documentation on the plot function for example
 ?plot
 help(plot)
+
+#####################
+# Working with Data #
+#####################
+
+#na.omit(dat) - returns new data.frame object equivalent to dat with rows that have NA
+#       entry removed
+
+#complete.cases(dat) - returns vector with row ids of rows of dat that are complete cases,
+#       i.e. that don't have missing values anywhere
 
 ##############################
 # Loops, If-Else, Operations #
@@ -360,3 +370,19 @@ boxplot(rbinom(1,20,0.6),runif(50),rnorm(1000))
 #sample(data, size = n, replace) - uniformly sample n samples from from data, with
 #       replacement if replace = TRUE
 plot(sample(rnorm(100), size = 20 ,replace = TRUE),xlab = 'Index', ylab = 'Normal Sample Value', main = 'Sampling 20 from Normal(0,1)')
+
+################################
+# Useful Libraries & Functions #
+################################
+
+# LIBRARIES
+
+#leaps - best subset regression
+
+#glmnet - lasso/ridge/elasticnet on glms
+
+# FUNCTIONS
+
+#coef(fit) - return the coefficients of fit
+
+#legend() - add legend to plots
