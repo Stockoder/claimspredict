@@ -83,6 +83,8 @@ paste('Kaggle', 'Competition', sep='_')
 #TRUE/FALSE - just syntax for booleans
 TRUE == FALSE
 
+!TRUE
+
 #switch(input, case, anothercase, someothercase, default) - just the generic switch
 #       usually faster than if-else
 switch('one', 'one' = 1, 'two' = 2, 3)
@@ -380,6 +382,8 @@ plot(sample(rnorm(100), size = 20 ,replace = TRUE),xlab = 'Index', ylab = 'Norma
 #leaps - best subset regression
 
 #glmnet - lasso/ridge/elasticnet on glms
+
+#rms - regression modelling (contains lrm(), which is dedicated to logistic regression)
 
 # FUNCTIONS
 

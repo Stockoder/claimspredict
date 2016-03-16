@@ -4,6 +4,22 @@
 # Refactoring #
 ###############
 
+#pcaproj(x, PCA, i, j, colvector) - projects the matrix x onto the ith and jth principal components
+#
+#   x is the data matrix containing numeric data only, where columns are predictors
+#   PCA is the object returned by prcomp
+#   i is an integer
+#   j is an integer
+#   colvector is a vector to color the projections by
+pcaproj = function(x, PCA, i, j, colvector) {
+
+    projected = x %*% as.matrix(PCA$rotation[,c(i,j)])
+
+    plot(projected,col=colvector,pch=16,cex=0.7)
+
+}
+
+
 #find.ids(x, type) - returns a vector corresponding to the column ids of the features
 #                    of the specified type
 #
